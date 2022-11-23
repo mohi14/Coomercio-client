@@ -7,6 +7,12 @@ import { CgProfile } from "react-icons/cg";
 const Navbar = () => {
     const { user, LogOut } = useContext(AuthContext)
 
+    const handleLogOut = () => {
+        LogOut()
+            .then(() => { })
+            .catch(err => console.error(err))
+    }
+
     const menuItems = <React.Fragment>
         <li><NavLink to='/home'>Home</NavLink></li>
         <li><NavLink to='/blog'>Blog</NavLink></li>
@@ -16,15 +22,15 @@ const Navbar = () => {
             user?.uid ?
                 <>
                     <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
-                    <li><button>Sign Out</button></li>
+                    <li><button onClick={handleLogOut}>Sign Out</button></li>
                 </>
                 :
-                <li><Link to='/home'>Login</Link></li>
+                <li><Link to='/login' className='btn btn-primary  text-white rounded-full lg:mt-1 lg:ml-4 lg:w-24 '>Login</Link></li>
         }
 
     </React.Fragment>
     return (
-        <div className="navbar bg-base-100 shadow-xl sticky  py-6">
+        <div className="navbar bg-base-100 shadow-md sticky  py-6">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
