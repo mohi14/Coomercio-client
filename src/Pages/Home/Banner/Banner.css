@@ -1,0 +1,19 @@
+.typewriter {
+    position: relative;
+}
+
+.typewriter::after {
+    content: '|';
+    position: absolute;
+    right: 0;
+    color: #F28C18;
+    width: 100%;
+    background-color: white;
+    animation: typing 3s steps(14) infinite;
+}
+
+@keyframes typing {
+    to {
+        width: 0%;
+    }
+}

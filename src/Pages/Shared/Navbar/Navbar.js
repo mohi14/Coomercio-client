@@ -5,6 +5,7 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import { CgProfile } from "react-icons/cg";
 
 const Navbar = () => {
+    const activeClassName = 'border-2 border-primary rounded-full'
     const { user, LogOut } = useContext(AuthContext)
 
     const handleLogOut = () => {
@@ -14,14 +15,17 @@ const Navbar = () => {
     }
 
     const menuItems = <React.Fragment>
-        <li><NavLink to='/home'>Home</NavLink></li>
-        <li><NavLink to='/blog'>Blog</NavLink></li>
+        <li><NavLink to='/home' className={({ isActive }) =>
+            isActive ? activeClassName : ''}>Home</NavLink></li>
+        <li><NavLink to='/blog' className={({ isActive }) =>
+            isActive ? activeClassName : ''}>Blog</NavLink></li>
 
 
         {
             user?.uid ?
                 <>
-                    <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+                    <li><NavLink to='/dashboard' className={({ isActive }) =>
+                        isActive ? activeClassName : ''}>Dashboard</NavLink></li>
                     <li><button onClick={handleLogOut}>Sign Out</button></li>
                 </>
                 :
@@ -30,7 +34,7 @@ const Navbar = () => {
 
     </React.Fragment>
     return (
-        <div className="navbar bg-base-100 shadow-md sticky  py-6">
+        <div className="navbar bg-base-100 shadow-md fixed  py-6">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
