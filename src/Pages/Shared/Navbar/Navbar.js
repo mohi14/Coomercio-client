@@ -44,7 +44,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link to='/' className="btn btn-ghost normal-case text-xl lg:text-4xl lg:ml-[200px] font-bold text-neutral">C<TbShoppingCart className='text-primary' />MERCIO</Link>
+                <Link to='/' className="btn btn-ghost normal-case text-xl lg:text-4xl lg:ml-[185px] font-bold text-neutral">C<TbShoppingCart className='text-primary' />MERCIO</Link>
             </div>
 
             <div className="navbar-end lg:mr-[200px] ">
