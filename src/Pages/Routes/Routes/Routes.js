@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../../../layout/Main";
 import Blog from "../../Blog/Blog";
 import Home from "../../Home/Home/Home";
+import Login from "../../Login/Login";
 import Products from "../../Products/Products";
 import SignUp from "../../SignUp/SignUp";
 
@@ -30,8 +31,12 @@ export const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
             },
             {
-                path: '/signup',
+                path: '/register',
                 element: <SignUp></SignUp>
+            },
+            {
+                path: '/login',
+                element: <Login></Login>
             }
         ]
     }

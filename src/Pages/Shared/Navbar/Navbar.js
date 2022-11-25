@@ -26,7 +26,7 @@ const Navbar = () => {
                 <>
                     <li><NavLink to='/dashboard' className={({ isActive }) =>
                         isActive ? activeClassName : ''}>Dashboard</NavLink></li>
-                    <li><button onClick={handleLogOut}>Sign Out</button></li>
+                    <li><button onClick={handleLogOut} className='btn btn-primary  text-white rounded-full lg:mt-1 lg:ml-4 '>Sign Out</button></li>
                 </>
                 :
                 <li><Link to='/login' className='btn btn-primary  text-white rounded-full lg:mt-1 lg:ml-4 lg:w-24 '>Login</Link></li>
@@ -60,13 +60,13 @@ const Navbar = () => {
                                 user?.photoURL ?
                                     <>
                                         <div className="avatar">
-                                            <div className="w-24 rounded-full">
+                                            <div className="w-10 rounded-full lg:ml-3">
                                                 <img src={user?.photoURL} alt='' />
                                             </div>
                                         </div>
                                     </>
                                     :
-                                    <CgProfile className='text-3xl font-semibold' />
+                                    <CgProfile className='text-3xl font-semibold lg:ml-3' />
                             }
                             </>
                             : ''

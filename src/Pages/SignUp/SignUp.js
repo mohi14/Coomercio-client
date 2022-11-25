@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FcGoogle } from "react-icons/fc";
@@ -10,7 +10,17 @@ const SignUp = () => {
     const { createUser, updateUser, SignInWithGoogle } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('');
+    const [users, setUsers] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        fetch('http://localhost:5000/users')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setUsers(data)
+            })
+    }, [])
 
     const handleSignUp = data => {
         setSignUpError('')
@@ -22,11 +32,52 @@ const SignUp = () => {
                 const userInfo = {
                     displayName: data.name
                 }
-                // updateUser(userInfo)
-                // .then(()=>{
-                //     save
-                // })
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(data.name, data.email, data.role)
+                        navigate('/')
+                    })
+                    .catch(err => console.log(err))
+
+            })
+            .catch(error => {
+                console.error(error)
+                setSignUpError(error.message)
+            })
+    }
+
+    const handleSignUpWithGoogle = () => {
+        SignInWithGoogle()
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+
+                const userCheck = users.find(usr => usr.email === user.email);
+
+                if (!userCheck) {
+                    saveUser(user.displayName, user.email, 'Buyer')
+                }
                 navigate('/')
+
+            })
+            .catch(error => {
+                console.error(error)
+            })
+
+    }
+
+    const saveUser = (name, email, role) => {
+        const user = { name, email, role };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
             })
     }
     return (
@@ -50,7 +101,7 @@ const SignUp = () => {
                             {
                                 required: 'Password is required',
                                 minLength: { value: 6, message: 'Password must be 6 character or longer' },
-                                pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must be strong' }
+                                pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must be contain a capital letter and a special character.' }
                             })}
 
                             className="input input-bordered w-full " />
@@ -63,11 +114,12 @@ const SignUp = () => {
                         <option>Seller</option>
                     </select>
                     <input className='btn btn-primary text-white w-full mt-4' value='Register' type="submit" />
-                    <div className="divider">OR</div>
-                    <button className=" btn btn-neutral w-full"><FcGoogle className='text-2xl mr-3' /> Continue with Google</button>
-                    {signUpError && <p className='text-red-600'>{signUpError}</p>}
                 </form>
+                <div className="divider">OR</div>
+                <button className=" btn btn-neutral w-full" onClick={handleSignUpWithGoogle}><FcGoogle className='text-2xl mr-3' /> Continue with Google</button>
                 <p className='mt-2'>Already Have an Account? <Link className='text-secondary' to='/login'>Please Login.</Link></p>
+                {signUpError && <p className='text-red-600'>{signUpError}</p>}
+
             </div>
         </div>
 
