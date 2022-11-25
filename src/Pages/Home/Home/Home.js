@@ -9,7 +9,6 @@ const Home = () => {
             <Banner></Banner>
             <ProductCategories></ProductCategories>
             <WhyCoomercio></WhyCoomercio>
-            <h1>This is home</h1>
         </div>
     );
 };

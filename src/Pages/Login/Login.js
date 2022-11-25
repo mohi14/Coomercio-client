@@ -10,11 +10,14 @@ import toast from 'react-hot-toast';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { SignIn, SignInWithGoogle, user } = useContext(AuthContext)
+    const { SignIn, SignInWithGoogle, user, setLoading } = useContext(AuthContext)
     const [logInError, setLogInError] = useState('');
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
     const location = useLocation();
+
+
+    const from = location.state?.from?.pathname || '/'
 
     useEffect(() => {
         fetch('http://localhost:5000/users')
@@ -32,12 +35,16 @@ const Login = () => {
                 const user = result.user;
                 console.log(user)
                 toast.success(`Welcome back ${user?.displayName}`)
-                navigate('/')
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.log(error)
                 setLogInError(error.message)
             })
+            .finally(() => {
+                setLoading(false)
+            }
+            )
     }
 
     const handleLoginWithGoogle = () => {
@@ -51,9 +58,13 @@ const Login = () => {
                     saveUser(user.displayName, user.email, 'Buyer')
                 }
                 toast.success(`Welcome back ${user?.displayName}`)
-                navigate('/')
+                navigate(from, { replace: true });
             })
             .catch(error => (console.error(error)))
+            .finally(() => {
+                setLoading(false)
+            }
+            )
     }
 
     const saveUser = (name, email, role) => {
