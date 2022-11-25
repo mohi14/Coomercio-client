@@ -2,9 +2,9 @@ import React from 'react';
 
 const Blog = () => {
     return (
-        <div className='pt-36 max-w-[1500px] m-auto mb-16'>
+        <div className='pt-36 max-w-[1500px] m-auto mb-16 w-11/12'>
             <h1 className=' text-center text-4xl font-bold mb-16'>Welcome to the Blog</h1>
-            <div className='border-2 border-secondary rounded-lg p-10'>
+            <div className='border-2 border-secondary rounded-lg p-10 '>
                 <h3 className='text-xl font-bold text-secondary'>What are the different ways to manage a state in a React application?</h3>
                 <div className='font-semibold text-gray-500 mt-3 text-justify'>
                     <p>There are four main types of state you need to properly manage in your React apps.</p>
