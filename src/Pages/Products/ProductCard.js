@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FcManager, FcApproval, FcCellPhone, FcCalendar } from "react-icons/fc";
 import { HiUser } from "react-icons/hi";
 import { GoLocation } from "react-icons/go";
 import { FaCalendarAlt } from "react-icons/fa";
+import BookingModal from '../Shared/BookingModal/BookingModal';
+
 
 const ProductCard = ({ product }) => {
     const { name, image, location, condition, description, original_price, posted_time, resale_price, sellers_name, use_time, sellerVerified, mobile_number } = product;
+
+    const [closeModal, setCloseModal] = useState(false)
+
+    const handleModal = () => {
+        setCloseModal(true)
+    }
     return (
         <div className='grid lg:grid-cols-8'>
             <div className='  lg:col-start-2 lg:col-end-6'>
@@ -34,6 +42,20 @@ const ProductCard = ({ product }) => {
                 <div className='mt-1 flex items-center'>
                     <p><FaCalendarAlt className='text-lg mr-2 ' /></p><p className='font-semibold'>{posted_time}</p>
                 </div>
+
+                <div className='mt-5'>
+                    <h1 className='text-xl font-semibold'>Product Configuration</h1>
+                    <p className='font-semibold'>Processor: <span className='font-normal'>{description.Processor}</span></p>
+                    <p className='font-semibold'>Graphics: <span className='font-normal'>{description.Graphics}</span></p>
+                    <p className='font-semibold'>Display
+                        : <span className='font-normal'>{description.Display}</span></p>
+                    <p className='font-semibold'>Memory: <span className='font-normal'>{description.Memory}</span></p>
+                    <p className='font-semibold'>Storage: <span className='font-normal'>{description.Storage}</span></p>
+                    <p className='font-semibold'>Battery
+                        : <span className='font-normal'>{description.Battery
+                        }</span></p>
+                    <p className='font-semibold'>Operating: <span className='font-normal'>{description.Operating}</span></p>
+                </div>
             </div>
             <div className=' lg:col-start-2 lg:col-end-8 bg-gray-300 shadow-lg p-10'>
                 <div className='text-4xl font-bold'>
@@ -50,8 +72,16 @@ const ProductCard = ({ product }) => {
                     </div>
                     <div>
                         <button className='btn btn-secondary'>Add to Wishlist</button>
-                        <button className='ml-5 text-white btn btn-primary'>Book Now</button>
+                        <label
+                            htmlFor="bookingModal"
+                            className="btn btn-primary text-white mt-5 ml-4"
+                            onClick={handleModal}>Book now</label>
                     </div>
+                    {
+                        closeModal && <BookingModal
+                            product={product}
+                            setCloseModal={setCloseModal}></BookingModal>
+                    }
                 </div>
             </div>
         </div>
