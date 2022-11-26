@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -11,6 +12,7 @@ const SignUp = () => {
     const [signUpError, setSignUpError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('');
     const [users, setUsers] = useState([]);
+    const [token] = useToken(createdUserEmail)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,7 +22,11 @@ const SignUp = () => {
                 console.log(data)
                 setUsers(data)
             })
-    }, [])
+    }, [users])
+
+    if (token) {
+        navigate('/')
+    }
 
     const handleSignUp = data => {
         setSignUpError('')
@@ -35,7 +41,7 @@ const SignUp = () => {
                 updateUser(userInfo)
                     .then(() => {
                         saveUser(data.name, data.email, data.role)
-                        navigate('/')
+                        // navigate('/')
                     })
                     .catch(err => console.log(err))
 
@@ -77,9 +83,21 @@ const SignUp = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                setCreatedUserEmail(email)
+                // getUserToken(email)
             })
     }
+
+    // const getUserToken = email => {
+    //     fetch(`http://localhost:5000/jwt?email=${email}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.accessToken) {
+    //                 localStorage.setItem('accessToken', data.accessToken)
+    //                 navigate('/')
+    //             }
+    //         })
+    // }
     return (
         <div className='py-36'>
             <div className='w-4/5 lg:w-1/4 p-7 shadow-2xl m-auto rounded-lg px-10 pb-20'>

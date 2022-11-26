@@ -13,10 +13,11 @@ const DashboardLayout = () => {
                 <div className="drawer-content mt-[105px]">
                     <Outlet></Outlet>
                 </div>
-                <div className="drawer-side  mt-[105px] fixed h-full">
+                <div className="drawer-side  mt-[105px] lg:fixed h-full">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 text-base-content bg-primary ">
-                        <li><Link to='/dashboard'>My Orders</Link></li>
+                    <ul className="menu p-10 w-80 text-white font-semibold text-lg bg-primary ">
+                        <li className=''><Link to='/dashboard'>My Orders</Link></li>
+                        <li className=''><Link to='/dashboard'>My Wishlist</Link></li>
                         {/* {
                         isAdmin && <>
                             <li><Link to='/dashboard/allusers'>All users</Link></li>
@@ -24,6 +25,12 @@ const DashboardLayout = () => {
                             <li><Link to='/dashboard/managedoctors'>Manage Doctor</Link></li>
                         </>
                     } */}
+                        <li className=''><Link to='/dashboard'>My Products</Link></li>
+                        <li className=''><Link to='/dashboard'>My Buyers</Link></li>
+                        <li className=''><Link to='/dashboard'>Add Product</Link></li>
+                        <li className=''><Link to='/dashboard'>All Sellers</Link></li>
+                        <li className=''><Link to='/dashboard'>All Buyers</Link></li>
+                        <li className=''><Link to='/dashboard'>Reported Items</Link></li>
                     </ul>
 
                 </div>
