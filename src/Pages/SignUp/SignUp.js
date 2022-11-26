@@ -15,14 +15,14 @@ const SignUp = () => {
     const [token] = useToken(createdUserEmail)
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetch('http://localhost:5000/users')
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setUsers(data)
-            })
-    }, [users])
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/users')
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data)
+    //             setUsers(data)
+    //         })
+    // }, [users])
 
     if (token) {
         navigate('/')
@@ -57,13 +57,7 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-
-                const userCheck = users.find(usr => usr.email === user.email);
-
-                if (!userCheck) {
-                    saveUser(user.displayName, user.email, 'Buyer')
-                }
-                navigate('/')
+                saveUser(user.displayName, user.email, 'Buyer')
 
             })
             .catch(error => {
