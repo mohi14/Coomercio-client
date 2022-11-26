@@ -11,7 +11,7 @@ import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { SignIn, SignInWithGoogle, user, setLoading } = useContext(AuthContext)
+    const { SignIn, SignInWithGoogle, setLoading } = useContext(AuthContext)
     const [logInError, setLogInError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState('');
     const [token] = useToken(loginUserEmail)

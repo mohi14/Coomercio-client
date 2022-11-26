@@ -1,10 +1,18 @@
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
+import useAdmin from '../hooks/useAdmin';
+import useBuyer from '../hooks/useBuyer';
+import useSeller from '../hooks/useSeller';
 import Navbar from '../Pages/Shared/Navbar/Navbar';
 
 const DashboardLayout = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+    const [isSeller] = useSeller(user?.email);
+    const [isAdmin] = useAdmin(user?.email);
+    const [isBuyer] = useBuyer(user?.email)
+
+    const activeClassName = 'bg-[#DE831B]'
     return (
         <div>
             <Navbar></Navbar>
@@ -13,24 +21,41 @@ const DashboardLayout = () => {
                 <div className="drawer-content mt-[105px]">
                     <Outlet></Outlet>
                 </div>
-                <div className="drawer-side  mt-[105px] lg:fixed h-full">
+                <div className="drawer-side  mt-[105px]">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-10 w-80 text-white font-semibold text-lg bg-primary ">
-                        <li className=''><Link to='/dashboard'>My Orders</Link></li>
-                        <li className=''><Link to='/dashboard'>My Wishlist</Link></li>
-                        {/* {
-                        isAdmin && <>
-                            <li><Link to='/dashboard/allusers'>All users</Link></li>
-                            <li><Link to='/dashboard/add-doctor'>Add a Doctor</Link></li>
-                            <li><Link to='/dashboard/managedoctors'>Manage Doctor</Link></li>
-                        </>
-                    } */}
-                        <li className=''><Link to='/dashboard'>My Products</Link></li>
-                        <li className=''><Link to='/dashboard'>My Buyers</Link></li>
-                        <li className=''><Link to='/dashboard'>Add Product</Link></li>
-                        <li className=''><Link to='/dashboard'>All Sellers</Link></li>
-                        <li className=''><Link to='/dashboard'>All Buyers</Link></li>
-                        <li className=''><Link to='/dashboard'>Reported Items</Link></li>
+                        <li ><NavLink to='/dashboard' className={({ isActive }) =>
+                            isActive ? activeClassName : ''}>My Orders</NavLink></li>
+                        {
+                            isBuyer && <>
+                                <li className=''><NavLink to='/myWishlist' className={({ isActive }) =>
+                                    isActive ? activeClassName : ''}>My Wishlist</NavLink></li>
+                            </>
+                        }
+                        {
+                            isSeller && <>
+                                <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                    isActive ? activeClassName : ''}>My Products</NavLink></li>
+                                <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                    isActive ? activeClassName : ''}>Add Product</NavLink></li>
+                                <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                    isActive ? activeClassName : ''}>My Buyers</NavLink></li>
+
+                            </>
+
+                        }
+                        {
+                            isAdmin && <>
+                                <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                    isActive ? activeClassName : ''}>All Sellers</NavLink></li>
+                                <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                    isActive ? activeClassName : ''}>All Buyers</NavLink></li>
+                                <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                    isActive ? activeClassName : ''}>Reported Items</NavLink></li>
+                            </>
+                        }
+
+
                     </ul>
 
                 </div>
