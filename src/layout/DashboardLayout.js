@@ -93,7 +93,7 @@ const DashboardLayout = () => {
                         }
                         {
                             isAdmin && <>
-                                <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                <li className=''><NavLink to='/dashboard/allSellers' className={({ isActive }) =>
                                     isActive ? activeClassName : ''}>All Sellers</NavLink></li>
                                 <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
                                     isActive ? activeClassName : ''}>All Buyers</NavLink></li>

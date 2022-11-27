@@ -71,7 +71,7 @@ const MyProducts = () => {
         return <LoadingSpiner></LoadingSpiner>
     }
     return (
-        <div className='max-w-[1400px] m-auto mt-16'>
+        <div className='w-11/12 m-auto mt-16'>
             <h1 className='text-3xl font-bold mb-5'>My Products</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
