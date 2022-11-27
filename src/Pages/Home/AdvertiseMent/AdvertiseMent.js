@@ -22,10 +22,10 @@ const AdvertiseMent = () => {
     }
     return (
         <div className='max-w-[1500px] m-auto my-16'>
-            <div className='text-center mb-16'>
+            <div className='text-center mb-8'>
                 <h2 className='text-4xl font-bold mb-10'>Advertise Laptops</h2>
 
-                <marquee behavior="scroll" direction="" className='bg-primary text-white p-5 text-2xl hidden'>Today's Great deals. Buy pre-owned laptops at cheapest price.</marquee>
+                <marquee behavior="scroll" direction="" className='bg-primary text-white p-5 text-2xl '>Today's Great deals. Buy pre-owned laptops at cheapest price.</marquee>
             </div>
             <div className='grid grid-cols-4 gap-10'>
                 {
