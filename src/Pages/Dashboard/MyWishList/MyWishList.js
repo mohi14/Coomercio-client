@@ -4,25 +4,27 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import LoadingSpiner from '../../Shared/LoadingSpiner/LoadingSpiner';
 
-const MyOrders = () => {
-    const { user } = useContext(AuthContext);
+const MyWishList = () => {
+    const { user } = useContext(AuthContext)
 
-    const { data: bookings = [], isLoading } = useQuery({
-        queryKey: ['bookings', user?.email],
+
+    const { data: wishlists = [], isLoading } = useQuery({
+        queryKey: ['wishlists', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`);
+            const res = await fetch(`http://localhost:5000/wishlists?email=${user?.email}`)
             const data = await res.json();
             return data;
         }
     })
 
+
+
     if (isLoading) {
         return <LoadingSpiner></LoadingSpiner>
     }
-
     return (
         <div className='max-w-[1400px] m-auto mt-10'>
-            <h1 className='text-3xl font-bold mb-5'>My Orders</h1>
+            <h1 className='text-3xl font-bold mb-5'>My Wishlist</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -31,35 +33,41 @@ const MyOrders = () => {
                             <th>Image</th>
                             <th>Product Name</th>
                             <th>Price</th>
-                            <th>Location</th>
+
                             <th>Payment</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            bookings.map((booking, i) => <tr key={booking._id} className="hover">
+                            wishlists.map((wishlist, i) => <tr key={wishlist._id} className="hover">
                                 <th>{i + 1}</th>
                                 <td> <div className="w-24 rounded-xl">
-                                    <img src={booking.image} alt="" />
+                                    <img src={wishlist.image} alt="" />
                                 </div></td>
-                                <td className='font-bold'>{booking.productName}</td>
-                                <td className='text-primary'>${booking.price}</td>
-                                <td>{booking.location}</td>
+                                <td className='font-bold'>{wishlist.productName}</td>
+                                <td>${wishlist.price}</td>
+
                                 <td>
                                     {
-                                        booking.price && !booking.paid && <Link to={`/dashboard/payment/${booking._id}`}><button className='btn btn-secondary btn-sm'>Pay</button></Link>
+                                        wishlist.price && !wishlist.paid && <Link to={`/dashboard/buy/${wishlist._id}`}><button className='btn btn-xs btn-neutral'>Buy</button></Link>
+
+
                                     }
+
                                     {
-                                        booking.price && booking.paid && <span className='text-accent'>Paid</span>
+                                        wishlist.price && wishlist.paid && <span className='text-accent'>Purchased</span>
                                     }
                                 </td>
+
                             </tr>)
                         }
+
                     </tbody>
+
                 </table>
             </div>
         </div>
     );
 };
 
-export default MyOrders;
+export default MyWishList;

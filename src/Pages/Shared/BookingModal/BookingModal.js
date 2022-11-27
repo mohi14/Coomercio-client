@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
-const BookingModal = ({ product, setCloseModal }) => {
+const BookingModal = ({ product, setCloseModal, setBookingButton }) => {
     const { name, resale_price, image, _id } = product;
     const { user } = useContext(AuthContext);
 
@@ -39,6 +39,7 @@ const BookingModal = ({ product, setCloseModal }) => {
                 if (data.acknowledged) {
                     setCloseModal(false)
                     toast.success('Booking Successful. Please check your dashboard for payment.')
+                    setBookingButton(true)
                 }
                 else {
                     toast.error(data.message)

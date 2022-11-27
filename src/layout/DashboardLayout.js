@@ -24,11 +24,11 @@ const DashboardLayout = () => {
                 <div className="drawer-side  mt-[105px]">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-10 w-80 text-white font-semibold text-lg bg-primary ">
-                        <li ><NavLink to='/dashboard' className={({ isActive }) =>
+                        <li ><NavLink to='/dashboard/myOrders' className={({ isActive }) =>
                             isActive ? activeClassName : ''}>My Orders</NavLink></li>
                         {
                             isBuyer && <>
-                                <li className=''><NavLink to='/myWishlist' className={({ isActive }) =>
+                                <li className=''><NavLink to='/dashboard/myWishlist' className={({ isActive }) =>
                                     isActive ? activeClassName : ''}>My Wishlist</NavLink></li>
                             </>
                         }

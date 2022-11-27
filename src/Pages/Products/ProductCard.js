@@ -1,18 +1,56 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FcManager, FcApproval, FcCellPhone, FcCalendar } from "react-icons/fc";
 import { HiUser } from "react-icons/hi";
 import { GoLocation } from "react-icons/go";
 import { FaCalendarAlt } from "react-icons/fa";
 import BookingModal from '../Shared/BookingModal/BookingModal';
+import toast from 'react-hot-toast';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 
 const ProductCard = ({ product }) => {
-    const { name, image, location, condition, description, original_price, posted_time, resale_price, sellers_name, use_time, sellerVerified, mobile_number } = product;
+    const { name, image, location, condition, description, original_price, posted_time, resale_price, sellers_name, use_time, sellerVerified, mobile_number, _id } = product;
 
     const [closeModal, setCloseModal] = useState(false)
+    const { user } = useContext(AuthContext)
+
+    const [button, setButton] = useState(false)
+    const [bookingButton, setBookingButton] = useState(false)
 
     const handleModal = () => {
         setCloseModal(true)
+    }
+
+
+
+    const handleWishlist = () => {
+
+        const wishlist = {
+            productName: name,
+            price: resale_price,
+            image,
+            productCode: _id,
+            email: user.email
+
+        }
+
+        fetch('http://localhost:5000/wishlists', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(wishlist)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success('Product added to your wishlist. Please Check it on Dashboard.')
+                    setButton(true)
+                }
+                else {
+                    toast.error(data.message)
+                }
+            })
     }
     return (
         <div className='grid lg:grid-cols-8'>
@@ -71,16 +109,17 @@ const ProductCard = ({ product }) => {
                         <p className='text-lg font-semibold'>Condition: <span className='font-normal'>{condition}</span></p>
                     </div>
                     <div>
-                        <button className='btn btn-secondary'>Add to Wishlist</button>
+                        <button className='btn btn-secondary' onClick={handleWishlist} disabled={button}>Add to Wishlist</button>
                         <label
                             htmlFor="bookingModal"
                             className="btn btn-primary text-white mt-5 ml-4"
-                            onClick={handleModal}>Book now</label>
+                            onClick={handleModal} disabled={bookingButton}>Book now</label>
                     </div>
                     {
                         closeModal && <BookingModal
                             product={product}
-                            setCloseModal={setCloseModal}></BookingModal>
+                            setCloseModal={setCloseModal}
+                            setBookingButton={setBookingButton}></BookingModal>
                     }
                 </div>
             </div>

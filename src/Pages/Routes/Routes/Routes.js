@@ -3,6 +3,8 @@ import DashboardLayout from "../../../layout/DashboardLayout";
 import Main from "../../../layout/Main";
 import Blog from "../../Blog/Blog";
 import MyOrders from "../../Dashboard/MyOrders/MyOrders";
+import BuyWishlistProduct from "../../Dashboard/MyWishList/BuyWishlistProduct";
+import MyWishList from "../../Dashboard/MyWishList/MyWishList";
 import Home from "../../Home/Home/Home";
 import Login from "../../Login/Login";
 import NotFound from "../../NotFound/NotFound";
@@ -46,9 +48,22 @@ export const router = createBrowserRouter([
                 element: <MyOrders></MyOrders>
             },
             {
+                path: '/dashboard/myOrders',
+                element: <MyOrders></MyOrders>
+            },
+            {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
                 loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`)
+            },
+            {
+                path: '/dashboard/myWishlist',
+                element: <MyWishList></MyWishList>
+            },
+            {
+                path: '/dashboard/buy/:id',
+                element: <BuyWishlistProduct></BuyWishlistProduct>,
+                loader: ({ params }) => fetch(`http://localhost:5000/wishlists/${params.id}`)
             }
         ]
     },
