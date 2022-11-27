@@ -12,7 +12,14 @@ const DashboardLayout = () => {
     const [isAdmin] = useAdmin(user?.email);
     const [isBuyer] = useBuyer(user?.email)
 
+    // isSellerLoading, isAdminLoading isBuyerLoading
+
     const activeClassName = 'bg-[#DE831B]'
+
+    // if (isSellerLoading) {
+    //     return <progress className="progress w-56"></progress>
+    // }
+
     return (
         <div>
             <Navbar></Navbar>
@@ -23,7 +30,47 @@ const DashboardLayout = () => {
                 </div>
                 <div className="drawer-side  mt-[105px]">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-10 w-80 text-white font-semibold text-lg bg-primary ">
+                    <div className="menu p-10 w-80 text-white font-semibold text-lg bg-primary ">
+
+                        {/* {
+                            isBuyerLoading && isSellerLoading && isAdminLoading ?
+                                <progress className="progress w-56"></progress>
+                                :
+
+                                <>
+                                    <li ><NavLink to='/dashboard/myOrders' className={({ isActive }) =>
+                                        isActive ? activeClassName : ''}>My Orders</NavLink></li>
+                                    {
+                                        isBuyer && <>
+                                            <li className=''><NavLink to='/dashboard/myWishlist' className={({ isActive }) =>
+                                                isActive ? activeClassName : ''}>My Wishlist</NavLink></li>
+                                        </>
+                                    }
+                                    {
+                                        isSeller && <>
+                                            <li className=''><NavLink to='/dashboard/myProducts' className={({ isActive }) =>
+                                                isActive ? activeClassName : ''}>My Products</NavLink></li>
+                                            <li className=''><NavLink to='/dashboard/addProduct' className={({ isActive }) =>
+                                                isActive ? activeClassName : ''}>Add Product</NavLink></li>
+                                            <li className=''><NavLink to='/dashboard/myBuyers' className={({ isActive }) =>
+                                                isActive ? activeClassName : ''}>My Buyers</NavLink></li>
+
+                                        </>
+
+                                    }
+                                    {
+                                        isAdmin && <>
+                                            <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                                isActive ? activeClassName : ''}>All Sellers</NavLink></li>
+                                            <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                                isActive ? activeClassName : ''}>All Buyers</NavLink></li>
+                                            <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                                isActive ? activeClassName : ''}>Reported Items</NavLink></li>
+                                        </>
+                                    }
+                                </>
+                        } */}
+
                         <li ><NavLink to='/dashboard/myOrders' className={({ isActive }) =>
                             isActive ? activeClassName : ''}>My Orders</NavLink></li>
                         {
@@ -34,11 +81,11 @@ const DashboardLayout = () => {
                         }
                         {
                             isSeller && <>
-                                <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                <li className=''><NavLink to='/dashboard/myProducts' className={({ isActive }) =>
                                     isActive ? activeClassName : ''}>My Products</NavLink></li>
-                                <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                <li className=''><NavLink to='/dashboard/addProduct' className={({ isActive }) =>
                                     isActive ? activeClassName : ''}>Add Product</NavLink></li>
-                                <li className=''><NavLink to='/dashboard' className={({ isActive }) =>
+                                <li className=''><NavLink to='/dashboard/myBuyers' className={({ isActive }) =>
                                     isActive ? activeClassName : ''}>My Buyers</NavLink></li>
 
                             </>
@@ -56,7 +103,7 @@ const DashboardLayout = () => {
                         }
 
 
-                    </ul>
+                    </div>
 
                 </div>
             </div>

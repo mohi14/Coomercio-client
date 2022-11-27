@@ -2,7 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../../layout/DashboardLayout";
 import Main from "../../../layout/Main";
 import Blog from "../../Blog/Blog";
+import AddProduct from "../../Dashboard/AddProduct/AddProduct";
+import MyBuyers from "../../Dashboard/MyBuyers/MyBuyers";
 import MyOrders from "../../Dashboard/MyOrders/MyOrders";
+import MyProducts from "../../Dashboard/MyProducts/MyProducts";
 import BuyWishlistProduct from "../../Dashboard/MyWishList/BuyWishlistProduct";
 import MyWishList from "../../Dashboard/MyWishList/MyWishList";
 import Home from "../../Home/Home/Home";
@@ -12,6 +15,7 @@ import Payment from "../../Payment/Payment";
 import Products from "../../Products/Products";
 import SignUp from "../../SignUp/SignUp";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
+import SellerRoutes from "../SelleRoutes/SellerRoutes";
 
 
 export const router = createBrowserRouter([
@@ -64,6 +68,18 @@ export const router = createBrowserRouter([
                 path: '/dashboard/buy/:id',
                 element: <BuyWishlistProduct></BuyWishlistProduct>,
                 loader: ({ params }) => fetch(`http://localhost:5000/wishlists/${params.id}`)
+            },
+            {
+                path: '/dashboard/myProducts',
+                element: <MyProducts></MyProducts>
+            },
+            {
+                path: '/dashboard/addProduct',
+                element: <SellerRoutes><AddProduct></AddProduct></SellerRoutes>
+            },
+            {
+                path: '/dashboard/myBuyers',
+                element: <MyBuyers></MyBuyers>
             }
         ]
     },

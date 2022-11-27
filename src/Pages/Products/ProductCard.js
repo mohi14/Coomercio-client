@@ -83,16 +83,23 @@ const ProductCard = ({ product }) => {
 
                 <div className='mt-5'>
                     <h1 className='text-xl font-semibold'>Product Configuration</h1>
-                    <p className='font-semibold'>Processor: <span className='font-normal'>{description.Processor}</span></p>
-                    <p className='font-semibold'>Graphics: <span className='font-normal'>{description.Graphics}</span></p>
-                    <p className='font-semibold'>Display
-                        : <span className='font-normal'>{description.Display}</span></p>
-                    <p className='font-semibold'>Memory: <span className='font-normal'>{description.Memory}</span></p>
-                    <p className='font-semibold'>Storage: <span className='font-normal'>{description.Storage}</span></p>
-                    <p className='font-semibold'>Battery
-                        : <span className='font-normal'>{description.Battery
-                        }</span></p>
-                    <p className='font-semibold'>Operating: <span className='font-normal'>{description.Operating}</span></p>
+                    {
+                        description?.Processor ?
+                            <>
+                                <p className='font-semibold'>Processor: <span className='font-normal'>{description.Processor}</span></p>
+                                <p className='font-semibold'>Graphics: <span className='font-normal'>{description.Graphics}</span></p>
+                                <p className='font-semibold'>Display
+                                    : <span className='font-normal'>{description.Display}</span></p>
+                                <p className='font-semibold'>Memory: <span className='font-normal'>{description.Memory}</span></p>
+                                <p className='font-semibold'>Storage: <span className='font-normal'>{description.Storage}</span></p>
+                                <p className='font-semibold'>Battery
+                                    : <span className='font-normal'>{description.Battery
+                                    }</span></p>
+                                <p className='font-semibold'>Operating: <span className='font-normal'>{description.Operating}</span></p>
+                            </>
+                            :
+                            ''
+                    }
                 </div>
             </div>
             <div className=' lg:col-start-2 lg:col-end-8 bg-gray-300 shadow-lg p-10'>
