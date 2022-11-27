@@ -10,8 +10,7 @@ const CheckoutForm = ({ booking }) => {
     const [clientSecret, setClientSecret] = useState("");
     const stripe = useStripe();
     const elements = useElements();
-    const { price, email,
-        buyerName, _id, productName } = booking;
+    const { price, email, buyerName, _id, productName, productCode } = booking;
 
 
     useEffect(() => {
@@ -81,8 +80,8 @@ const CheckoutForm = ({ booking }) => {
                 transactionId: paymentIntent.id,
                 email,
                 bookingId: _id,
-                productName
-
+                productName,
+                productCode
             }
             // store payment info in the database
             fetch("http://localhost:5000/payments", {

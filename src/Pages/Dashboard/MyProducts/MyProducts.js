@@ -46,6 +46,27 @@ const MyProducts = () => {
 
     }
 
+    const handleAdvertise = product => {
+        fetch(`http://localhost:5000/advertisement/${product._id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire(
+                        'Advertisement Successful!',
+                        `The advertisement of ${product.name} will show in Homepage`,
+                        'success'
+                    )
+                }
+            })
+    }
+
     if (isLoading) {
         return <LoadingSpiner></LoadingSpiner>
     }
@@ -78,13 +99,24 @@ const MyProducts = () => {
                                 <td>{myProduct.posted_time}</td>
                                 <td>
                                     {
-                                        myProduct.sold ?
-                                            <span className='text-secondary'>Sold</span>
+                                        myProduct.paid ?
+                                            <span className='text-green-500'>Sold</span>
                                             :
                                             <span className='text-secondary'>Available</span>
                                     }
                                 </td>
-                                <td><button className='btn btn-success btn-xs text-white'>Advertise</button></td>
+                                <td>
+                                    {
+                                        myProduct.paid && ''
+                                    }
+                                    {
+                                        !myProduct.paid && !myProduct.advertisement && <button className='btn btn-success btn-xs text-white' onClick={() => handleAdvertise(myProduct)}>Advertise</button>
+
+                                    }
+                                    {
+                                        !myProduct.paid && myProduct.advertisement && <span className='text-info'>On Advertise</span>
+                                    }
+                                </td>
                                 <td><button className='btn btn-error btn-xs text-white' onClick={() => handleDelete(myProduct)}>Delete</button></td>
                             </tr>)
                         }

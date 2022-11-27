@@ -45,7 +45,8 @@ const AddProduct = () => {
                         seller_email: user?.email,
                         use_time: data.useTime,
                         mobile_number: data.number,
-                        condition: data.condition
+                        condition: data.condition,
+                        paid: false
                     }
                     fetch('http://localhost:5000/laptops', {
                         method: 'POST',
@@ -74,12 +75,12 @@ const AddProduct = () => {
             <form onSubmit={handleSubmit(handleAddProduct)} >
                 <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
                     <div className="form-control w-full ">
-                        <label className="label"><span className="label-text">Product Name</span></label>
+                        <label className="label"><span className="label-text">Laptop Name</span></label>
                         <input type="text" {...register("name", { required: "Product Name is required" })} className="input input-bordered w-full " />
                         {errors.name && <p role="alert" className='text-red-600'>{errors.name?.message}</p>}
                     </div>
                     <div>
-                        <label className="label"><span className="label-text">Select Category</span></label>
+                        <label className="label"><span className="label-text">Select Brand</span></label>
                         <select className="select select-bordered w-full " {...register("category")} defaultValue='HP'>
                             <option >HP</option>
                             <option>Dell</option>
@@ -125,8 +126,8 @@ const AddProduct = () => {
                         {errors.img && <p role="alert" className='text-red-600'>{errors.img?.message}</p>}
                     </div>
                     <div className='lg:col-span-2'>
-                        <label className="label"><span className="label-text">Product Description</span></label>
-                        <textarea className="textarea textarea-bordered w-full col-" {...register("description", { required: "Product description is required" })} placeholder="Describe about your product."></textarea>
+                        <label className="label"><span className="label-text">Laptop Description</span></label>
+                        <textarea className="textarea textarea-bordered w-full col-" {...register("description", { required: "Product description is required" })} placeholder="Describe about your laptop."></textarea>
                         {errors.description && <p role="alert" className='text-red-600'>{errors.description?.message}</p>}
                     </div>
 
