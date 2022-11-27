@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,8 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AddProduct = () => {
     const { user } = useContext(AuthContext)
+
+    const [buttonLoading, setButtonLoading] = useState(false)
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const imageHostKey = process.env.REACT_APP_imgBB_key
@@ -18,6 +20,7 @@ const AddProduct = () => {
 
 
     const handleAddProduct = data => {
+        setButtonLoading(true)
         const image = data.img[0];
         const fromData = new FormData();
         fromData.append('image', image)
@@ -54,6 +57,7 @@ const AddProduct = () => {
                         .then(res => res.json())
                         .then(result => {
                             toast.success(`${data.name} is added successfully`)
+                            setButtonLoading(false)
                             navigate('/dashboard/myProducts')
                         })
                 }
@@ -128,7 +132,12 @@ const AddProduct = () => {
 
                 </div>
                 <div className='mt-8 m-auto lg:w-1/5'>
-                    <input className='btn btn-primary text-white  w-full' value='Add Product' type="submit" />
+                    {
+                        buttonLoading ?
+                            <button className="btn loading btn-primary w-full text-white">Adding....</button>
+                            :
+                            <input className='btn btn-primary text-white  w-full' value='Add Product' type="submit" />
+                    }
                 </div>
 
             </form>
