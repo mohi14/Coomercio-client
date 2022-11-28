@@ -30,7 +30,8 @@ const MyProducts = () => {
                 fetch(`http://localhost:5000/myProducts/${product._id}`, {
                     method: 'DELETE',
                     headers: {
-                        'content-type': ' application/json'
+                        'content-type': ' application/json',
+                        authorization: `bearer ${localStorage.getItem('coomercioToken')}`
                     }
                 })
                     .then(res => res.json())
@@ -50,7 +51,8 @@ const MyProducts = () => {
         fetch(`http://localhost:5000/advertisement/${product._id}`, {
             method: 'PUT',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('coomercioToken')}`
             }
         })
             .then(res => res.json())

@@ -7,7 +7,12 @@ const AdvertiseMent = () => {
     const { data: advertisements = [], isLoading } = useQuery({
         queryKey: ['advertisements'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/advertisement');
+            const res = await fetch('http://localhost:5000/advertisement', {
+                headers: {
+                    'content-type': ' application/json',
+                    authorization: `bearer ${localStorage.getItem('coomercioToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }

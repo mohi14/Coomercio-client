@@ -22,7 +22,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/'
 
     if (token) {
-
+        navigate(from, { replace: true });
     }
 
     const handleLogIn = data => {
@@ -33,7 +33,7 @@ const Login = () => {
                 console.log(user)
                 toast.success(`Welcome back ${user?.displayName}`)
                 setLoginUserEmail(data.email)
-                navigate(from, { replace: true });
+                // navigate(from, { replace: true });
 
             })
             .catch(error => {
@@ -71,7 +71,7 @@ const Login = () => {
             .then(res => res.json())
             .then(data => {
                 setLoginUserEmail(email)
-                navigate(from, { replace: true });
+                // navigate(from, { replace: true });
             })
     }
 

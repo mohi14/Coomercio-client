@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { FcManager, FcApproval, FcCellPhone, FcCalendar } from "react-icons/fc";
+import { FcApproval, FcCellPhone } from "react-icons/fc";
 import { HiUser } from "react-icons/hi";
 import { GoLocation } from "react-icons/go";
 import { FaCalendarAlt } from "react-icons/fa";
@@ -37,7 +37,10 @@ const ProductCard = ({ product }) => {
         fetch('http://localhost:5000/wishlists', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('coomercioToken')}`
+                }
             },
             body: JSON.stringify(wishlist)
         })

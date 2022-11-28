@@ -1,20 +1,41 @@
-import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import LoadingSpiner from '../../Shared/LoadingSpiner/LoadingSpiner';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 import { FcApproval } from "react-icons/fc";
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AllSellers = () => {
-    const { data: sellers = [], isLoading, refetch } = useQuery({
-        queryKey: ['sellers'],
-        queryFn: async () => {
-            const res = await fetch('http://localhost:5000/sellers');
-            const data = await res.json();
-            return data;
-        }
-    })
+    // const { user } = useContext(AuthContext)
+    const [sellers, setSellers] = useState([])
+    // const { data: sellers = [user], isLoading, refetch } = useQuery({
+    //     queryKey: ['sellers'],
+    //     queryFn: async () => {
+    //         const res = await fetch('http://localhost:5000/sellers');
+    //         const data = await res.json();
+    //         return data;
+    //     }
+    // })
 
+    useEffect(() => {
+        fetch('http://localhost:5000/sellers')
+            .then(res => res.json())
+            .then(data => {
+                setSellers(data)
+            })
+    }, [sellers])
+
+
+
+    // const sellers = useLoaderData()
+    // if (isLoading) {
+    //     return <LoadingSpiner></LoadingSpiner>
+    // }
+    // refetch()
+    // const navigation = useNavigation()
+    // if (navigation.state === 'loading') {
+    //     return <LoadingSpiner></LoadingSpiner>
+    // }
     const handleDelete = user => {
         Swal.fire({
             title: 'Are you sure?',
@@ -35,7 +56,7 @@ const AllSellers = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.deletedCount > 0) {
-                            refetch();
+                            // refetch();
                             toast.success(`${user.name} deleted successfully`)
                         }
                     })
@@ -57,7 +78,7 @@ const AllSellers = () => {
             .then(data => {
                 console.log(data)
                 if (data.modifiedCount > 0) {
-                    refetch();
+                    // refetch();
                     Swal.fire(
                         'Verification Successful!',
                         `${user.name} is now a verify seller.`,
@@ -67,9 +88,7 @@ const AllSellers = () => {
             })
     }
 
-    if (isLoading) {
-        return <LoadingSpiner></LoadingSpiner>
-    }
+
 
     return (
         <div className='w-11/12 m-auto mt-16'>
