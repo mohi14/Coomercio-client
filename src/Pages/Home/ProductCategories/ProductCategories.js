@@ -7,7 +7,7 @@ const ProductCategories = () => {
     const [brands, setBrands] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        axios.get('http://localhost:5000/brands')
+        axios.get('https://coomercio-server-mohi14.vercel.app/brands')
             .then(data => {
                 setBrands(data.data)
                 setLoading(false)

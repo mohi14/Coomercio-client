@@ -11,14 +11,14 @@ const AllSellers = () => {
     // const { data: sellers = [user], isLoading, refetch } = useQuery({
     //     queryKey: ['sellers'],
     //     queryFn: async () => {
-    //         const res = await fetch('http://localhost:5000/sellers');
+    //         const res = await fetch('https://coomercio-server-mohi14.vercel.app/sellers');
     //         const data = await res.json();
     //         return data;
     //     }
     // })
 
     useEffect(() => {
-        fetch('http://localhost:5000/sellers')
+        fetch('https://coomercio-server-mohi14.vercel.app/sellers')
             .then(res => res.json())
             .then(data => {
                 setSellers(data)
@@ -47,7 +47,7 @@ const AllSellers = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/sellers/${user._id}`, {
+                fetch(`https://coomercio-server-mohi14.vercel.app/sellers/${user._id}`, {
                     method: 'DELETE',
                     headers: {
                         'content-type': ' application/json'
@@ -68,7 +68,7 @@ const AllSellers = () => {
 
 
     const handleVerify = user => {
-        fetch(`http://localhost:5000/sellers/${user.email}`, {
+        fetch(`https://coomercio-server-mohi14.vercel.app/sellers/${user.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

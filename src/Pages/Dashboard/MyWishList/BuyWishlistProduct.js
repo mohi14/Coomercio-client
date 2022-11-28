@@ -30,7 +30,7 @@ const BuyWishlistProduct = () => {
 
         }
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://coomercio-server-mohi14.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -11,7 +11,7 @@ const AddProduct = () => {
     const { data: status = [] } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/sellers/${user?.email}`);
+            const res = await fetch(`https://coomercio-server-mohi14.vercel.app/sellers/${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -61,7 +61,7 @@ const AddProduct = () => {
                         sellerVerified: verify
 
                     }
-                    fetch('http://localhost:5000/laptops', {
+                    fetch('https://coomercio-server-mohi14.vercel.app/laptops', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

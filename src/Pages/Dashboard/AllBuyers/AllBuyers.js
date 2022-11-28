@@ -9,7 +9,7 @@ const AllBuyers = () => {
 
     useEffect(() => {
 
-        fetch('http://localhost:5000/buyers', {
+        fetch('https://coomercio-server-mohi14.vercel.app/buyers', {
             headers: {
                 authorization: `bearer ${localStorage.getItem('coomercioToken')}`
             }
@@ -42,7 +42,7 @@ const AllBuyers = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 setButtonLoading(true)
-                fetch(`http://localhost:5000/buyers/${user._id}`, {
+                fetch(`https://coomercio-server-mohi14.vercel.app/buyers/${user._id}`, {
                     method: 'DELETE',
                     headers: {
                         'content-type': ' application/json',

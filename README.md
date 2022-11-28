@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# Coomercio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Live Website [https://coomercio-50006.web.app/](https://coomercio-50006.web.app/).
 
-## Available Scripts
 
-In the project directory, you can run:
+### Welcome to my github repo. This website is about buying and selling used laptops.
 
-### `npm start`
+* This website provides 3 categories laptops. To see those categories visitors must login or register.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* By selecting category logged in user will go to selected category route. There they will see different types of laptops.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* User can book any laptops or can save it in wishlist. After booking any laptop user can buy or pay for the laptop in the my orders routes.
 
-### `npm test`
+* Dashboard route change according to user. Buyers, sellers and admin can see different types of routes when they access to their dashboard.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* In a Registration from user can select as a seller of buyer to sign up.
 
-### `npm run build`
+* Sellers can add new product and make the advertisement of their productAdvertisement of their product will be visible in homepage.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Admin can see all the buyers and all sellers. And admin can delete any users. Admin also can verify any sellers.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* This is a MERN stack web development. And some others features also used to build this website, like..
+     * Strong and wonderful css framework called tailwind CSS is used to beautify this website as well as it makes this website responsive.
+     * DaisyUI a component library of tailwind also used.
+     * Authentication system and hosting is done by the help of Firebase.
+     * Some icons of this website are grabbed from React-icons.
+     * React-hot-toast and SweetAler2 are used for warning and successful alert.
+     * BackEnd server hosted in vercel.
+     * React query used to call api from server.
+     * React Form is used to make form.
+     * Stipe payment getaway is implemented for payment.

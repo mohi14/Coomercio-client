@@ -10,7 +10,7 @@ const MyProducts = () => {
     const { data: myProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['myProducts', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myProducts?email=${user?.email}`);
+            const res = await fetch(`https://coomercio-server-mohi14.vercel.app/myProducts?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -27,7 +27,7 @@ const MyProducts = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/myProducts/${product._id}`, {
+                fetch(`https://coomercio-server-mohi14.vercel.app/myProducts/${product._id}`, {
                     method: 'DELETE',
                     headers: {
                         'content-type': ' application/json',
@@ -48,7 +48,7 @@ const MyProducts = () => {
     }
 
     const handleAdvertise = product => {
-        fetch(`http://localhost:5000/advertisement/${product._id}`, {
+        fetch(`https://coomercio-server-mohi14.vercel.app/advertisement/${product._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',

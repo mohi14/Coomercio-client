@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FcGoogle } from "react-icons/fc";
@@ -11,12 +11,11 @@ const SignUp = () => {
     const { createUser, updateUser, SignInWithGoogle } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('');
-    const [users, setUsers] = useState([]);
     const [token] = useToken(createdUserEmail)
     const navigate = useNavigate();
 
     // useEffect(() => {
-    //     fetch('http://localhost:5000/users')
+    //     fetch('https://coomercio-server-mohi14.vercel.app/users')
     //         .then(res => res.json())
     //         .then(data => {
     //             console.log(data)
@@ -69,7 +68,7 @@ const SignUp = () => {
     const saveUser = (name, email, role) => {
         const status = false;
         const user = { name, email, role, status };
-        fetch('http://localhost:5000/users', {
+        fetch('https://coomercio-server-mohi14.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -84,7 +83,7 @@ const SignUp = () => {
     }
 
     // const getUserToken = email => {
-    //     fetch(`http://localhost:5000/jwt?email=${email}`)
+    //     fetch(`https://coomercio-server-mohi14.vercel.app/jwt?email=${email}`)
     //         .then(res => res.json())
     //         .then(data => {
     //             if (data.accessToken) {

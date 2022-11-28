@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
 
         }
 
-        fetch('http://localhost:5000/wishlists', {
+        fetch('https://coomercio-server-mohi14.vercel.app/wishlists', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

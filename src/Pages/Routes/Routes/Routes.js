@@ -10,6 +10,7 @@ import MyOrders from "../../Dashboard/MyOrders/MyOrders";
 import MyProducts from "../../Dashboard/MyProducts/MyProducts";
 import BuyWishlistProduct from "../../Dashboard/MyWishList/BuyWishlistProduct";
 import MyWishList from "../../Dashboard/MyWishList/MyWishList";
+import ReportedItems from "../../Dashboard/ReportedItems/ReportedItems";
 import Home from "../../Home/Home/Home";
 import Login from "../../Login/Login";
 import NotFound from "../../NotFound/NotFound";
@@ -42,7 +43,7 @@ export const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <PrivateRoutes><Products></Products></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader: ({ params }) => fetch(`https://coomercio-server-mohi14.vercel.app/category/${params.id}`)
             }
         ]
     },
@@ -61,7 +62,7 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`)
+                loader: ({ params }) => fetch(`https://coomercio-server-mohi14.vercel.app/bookings/${params.id}`)
             },
             {
                 path: '/dashboard/myWishlist',
@@ -70,7 +71,7 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/buy/:id',
                 element: <BuyWishlistProduct></BuyWishlistProduct>,
-                loader: ({ params }) => fetch(`http://localhost:5000/wishlists/${params.id}`)
+                loader: ({ params }) => fetch(`https://coomercio-server-mohi14.vercel.app/wishlists/${params.id}`)
             },
             {
                 path: '/dashboard/myProducts',
@@ -82,7 +83,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/myBuyers',
-                element: <MyBuyers></MyBuyers>
+                element: <SellerRoutes><MyBuyers></MyBuyers></SellerRoutes>
             },
             {
                 path: '/dashboard/allSellers',
@@ -91,6 +92,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/allBuyers',
                 element: <AdminRoutes><AllBuyers></AllBuyers></AdminRoutes>
+            },
+            {
+                path: '/dashboard/reportedItems',
+                element: <ReportedItems><AdminRoutes></AdminRoutes></ReportedItems>
             }
         ]
     },

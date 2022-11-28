@@ -7,7 +7,7 @@ const AdvertiseMent = () => {
     const { data: advertisements = [], isLoading } = useQuery({
         queryKey: ['advertisements'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/advertisement', {
+            const res = await fetch('https://coomercio-server-mohi14.vercel.app/advertisement', {
                 headers: {
                     'content-type': ' application/json',
                     authorization: `bearer ${localStorage.getItem('coomercioToken')}`
@@ -32,7 +32,7 @@ const AdvertiseMent = () => {
 
                 <marquee behavior="scroll" direction="" className='bg-primary text-white p-5 text-2xl '>Today's Great deals. Buy pre-owned laptops at cheapest price.</marquee>
             </div>
-            <div className='grid grid-cols-4 gap-10'>
+            <div className='grid grid-cols-1 lg:grid-cols-4 gap-10'>
                 {
                     advertisements.map(advertisement => <div className="card bg-base-100 static w-full rounded-lg shadow-xl border-2 border-secondary">
                         <img src={advertisement.image} alt="Shoes" className='rounded-t-lg h-[200px] w-auto' />
