@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import LoadingSpiner from '../../Shared/LoadingSpiner/LoadingSpiner';
+import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
+import { FcApproval } from "react-icons/fc";
 
 const AllSellers = () => {
     const { data: sellers = [], isLoading, refetch } = useQuery({
@@ -12,8 +15,56 @@ const AllSellers = () => {
         }
     })
 
-    const handleDelete = id => {
+    const handleDelete = user => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#F28C18',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/sellers/${user._id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'content-type': ' application/json'
+                    }
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            refetch();
+                            toast.success(`${user.name} deleted successfully`)
+                        }
+                    })
+            }
+        })
 
+
+    }
+
+
+    const handleVerify = user => {
+        fetch(`http://localhost:5000/sellers/${user.email}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire(
+                        'Verification Successful!',
+                        `${user.name} is now a verify seller.`,
+                        'success'
+                    )
+                }
+            })
     }
 
     if (isLoading) {
@@ -38,13 +89,13 @@ const AllSellers = () => {
                         {
                             sellers.map((seller, i) => <tr key={seller._id} className="hover">
                                 <th>{i + 1}</th>
-                                <td className='font-bold'>{seller.name}</td>
+                                <td className='font-bold'>{seller.name} {seller.status && <FcApproval className='inline mb-1' />}</td>
                                 <td>{seller.email}</td>
                                 <td>
                                     {
-                                        !seller.status ?
+                                        seller.status ?
                                             <span className='text-green-500'>Verified</span>
-                                            : <button className='btn btn-xs btn-secondary'>Verify</button>
+                                            : <button className='btn btn-xs btn-secondary' onClick={() => handleVerify(seller)}>Verify</button>
                                     }
 
                                 </td>

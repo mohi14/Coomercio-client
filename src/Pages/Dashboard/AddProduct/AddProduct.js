@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -6,6 +7,18 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AddProduct = () => {
     const { user } = useContext(AuthContext)
+
+    const { data: status = [] } = useQuery({
+        queryKey: ['sellers'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/sellers/${user?.email}`);
+            const data = await res.json();
+            return data;
+        }
+    })
+
+    const verify = status.status;
+
 
     const [buttonLoading, setButtonLoading] = useState(false)
 
@@ -16,8 +29,6 @@ const AddProduct = () => {
     const date = new Date().toLocaleDateString();
     const time = new Date().toLocaleTimeString();
     const posted_time = `${date}  ${time}`
-
-
 
     const handleAddProduct = data => {
         setButtonLoading(true)
@@ -46,7 +57,9 @@ const AddProduct = () => {
                         use_time: data.useTime,
                         mobile_number: data.number,
                         condition: data.condition,
-                        paid: false
+                        paid: false,
+                        sellerVerified: verify
+
                     }
                     fetch('http://localhost:5000/laptops', {
                         method: 'POST',
